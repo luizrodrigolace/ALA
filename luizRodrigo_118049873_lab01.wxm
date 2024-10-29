@@ -1,0 +1,27 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: comment start ]
+Luiz Rodrigo Lacé Rodrigues DRE:118049873
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load(eigen);
+with_slider_draw(
+    t, /* nome da variável utilizada pelo slider */
+    makelist((2*%pi*i)/100,i,0,100), /* intervalo dos valores de t, de pouco em pouco para ter varios frames. 
+    Indo de 0 a 2pi para dar uma volta completa*/
+    xrange=[-1,1], /* dimensão horizontal da janela do desenho */
+    yrange=[-1,1], /* dimensão vertical da janela do desenho */
+    head_length=0.05,head_angle=15,/* arrumando o tamanho e o angulo da seta do vetor */
+    vector([0,0],[cos(t),sin(t)]) /* animando o vetor que parte da origem
+    até o ponto [cos(t),sin(t)] para ser unitario
+    e com o t variado no intervalo que determinamos no makelist gerando assim sua rotação */
+)$
+
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

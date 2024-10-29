@@ -1,0 +1,550 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: comment start ]
+Aluno: Luiz Rodrigo Lacé Rodrigues   DRE:118049873
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+2. Se o fluxo médio nas ruas a e g for, respectivamente, de 20 carros e de 100 carros,
+qual será o fluxo médio nas demais ruas?
+
+    Substituindo os valores de a e g no sistema e utilizando a função linsolve para resolve-lo,
+    chegamos que o fluxo medio das demais ruas é:
+    b=200,c=80,d=300,e=180,f=80
+    
+
+3. Quais são os grupos de três ruas que podem ser fechadas sem que o trânsito
+trave?
+    
+    O grupo de 3 ruas que pode ser fechado sem que o transito trave é
+    (a,f,g)
+
+4. Quais são os grupos de duas ruas que podem ser fechadas sem que o trânsito
+trave?
+    
+    Os grupos de duas ruas que podem ser fechadas sem que o transito trave são:
+    (a,b),(a,f),(a,g),(b,c),(c,f) e (f,g)
+
+5. Se a CET-RIO precisar fechar as ruas e e g para obras durante dois dias, o que
+pode ser feito para evitar que o trânsito trave neste grupo de ruas?
+
+ Vamos precisar inverter o fluxo dos carros nas ruas C e F para que todo o sistema de ruas não trave
+
+6. Qual a quantidade máxima de carros que pode passar na rua g , sem que o trân-
+sito trave completamente?
+    
+    A quantidade máxima de carros que pode passar na rua g sem que o transito trave
+    é de 300 carros
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+equacoes:[a+e-200,a+b+f-300,b+g-300,g+d-400,d+f-300-c,c+500-e-400]$/*modelagem do fluxo de veiculos*/
+linsolve(equacoes,[a,b,c,d,e,f,g]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/*questão 2 - substiuindo os valores de a e g dados no enunciado e também as variaveis para
+calcular o resultado das outras ruas*/
+equacoes:[20+e-200,20+b+f-300,b+100-300,100+d-400,d+f-300-c,c+500-e-400]$
+linsolve(equacoes,[b,c,d,e,f]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/*Questão 4*/
+/*Para essa questão fui testando os resultados do sistema caso eu fosse fechando diferentes duplas de 
+ruas, uma a uma, e anotando no papel. Assim foi mais facil também chegar no resultado da questão 3 depois. Separei os calculos
+das ruas nas proximas celulas por questão de facilidade com o nome das variaveis*/
+/*Por algum motivo a minha função não retorna false, mas a implementação do true está certa. podemos entender
+como false o que ela retorna como "done"*/
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a:0; /*rua fechada*/
+b:0; /*rua fechada*/
+c;
+d;
+e;
+f;
+g;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[c,d,e,f,g]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 4*/
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a:0;/*rua fechada*/
+b;
+c;
+d;
+e;
+f:0;/*rua fechada*/
+g;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[b,c,d,e,g]);
+trava(sistema);
+
+/* [wxMaxima: input   end   ] */
+/* [wxMaxima: question  start ] */
+<math><st>Is </st><mi>-</mi><mn>100</mn><mo>&lt;</mo><mn>0</mn><st> positive, negative or zero?</st></math>
+/* [wxMaxima: question  end   ] */
+/* [wxMaxima: answer  start ] */
+;
+/* [wxMaxima: answer  end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 4 */
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a:0; /*rua fechada*/
+b;
+c;
+d;
+e;
+f;
+g:0;/*rua fechada*/
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[b,c,d,e,f]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 4 */
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b:0;/*rua fechada*/
+c:0;/*rua fechada*/
+d;
+e;
+f;
+g;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,d,e,f,g]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 4 */
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b;
+c:0;/*rua fechada*/
+d;
+e;
+f:0;/*rua fechada*/;
+g;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,b,d,e,g]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 4 */
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b;
+c;/*rua fechada*/
+d;
+e;
+f:0;/*rua fechada*/;
+g:0;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,b,c,d,e]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 3*/
+/*conforme fui achando os grupos de 2 ruas que poderiam ser fechadas, achei que algumas resultavam
+em uma terceira = 0*/
+
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a:0;/*rua fechada*/
+b;
+c;
+d;
+e;
+f:0;/*rua fechada*/
+g:0;/*rua fechada*/
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[b,c,d,e]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 6 */
+/*Nessa questão testei valores para G e fui diminuindo ou aumentando conforme o transito travava ou não.
+Fiz mais duas celulas para mostrar em que numero G passa a ser travar o transito. Nesta celula consta exatamente
+o numero maximo*/
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b;
+c;
+d;
+e;
+f;
+g:300;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,b,c,d,e,f]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 6*/
+/* Lembrando que quando a minha funçao retona "done" quer dizer que o transito não travou*/
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b;
+c;
+d;
+e;
+f;
+g:299;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,b,c,d,e,f]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/* Questão 6*/
+/* Aqui como a função trava retornou true, temos que o transito trava*/
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b;
+c;
+d;
+e;
+f;
+g:301;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,b,c,d,e,f]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/*Questão 5*/
+/*Fazendo os calculos para que as ruas E e G sejam fechadas, vemos que as ruas C e F retornam numeros negativos. Logo
+vamos precisar inverter o fluxo dos carros nessas ruas para que todo o sistema de ruas não trave. Provo isso na proxima celula. */
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b;
+c;
+d;
+e:0;
+f;
+g:0;
+s1:a+e-200$
+s2:a+b+f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d+f-300-c$
+s6:c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,b,c,d,f]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+/*Questão 5*/
+/*Como precisamos inverter as ruas, a modelagem do sistema também é modificada visto que vamos inverter o sinal
+das respectivas ruas. */
+trava(lista):=
+block(
+    [i],                                  /*variaveis locais*/
+    
+    if (emptyp(lista) = true) then (             /*se a lista for vazia, retorna true*/
+        return(true) 
+    )
+    else(
+        for i:1 thru (length(lista)) do(                         /*percorrendo a lista*/
+            if (numberp(rhs(lista[i])) = true) then(           /*verifica se a expressao do lado direito é um numero*/
+                if (asksign(rhs(lista[i])) = neg) then(          /*verifica o numero é negativo*/
+                    return(true)
+                )
+            )
+        )
+    )
+)$
+
+a;
+b;
+c;
+d;
+e:0;
+f;
+g:0;
+s1:a+e-200$
+s2:a+b-f-300$
+s3:b+g-300$
+s4:g+d-400$
+s5:d-f-300+c$
+s6:-c+500-e-400$
+equacoes:[s1,s2,s3,s4,s5,s6]$   
+sistema:linsolve(equacoes,[a,b,c,d,f]); /*escolhendo os parametros*/
+trava(sistema);
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

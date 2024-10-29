@@ -1,0 +1,40 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: comment start ]
+Luiz Rodrigo Lacé Rodrigues - 118049873
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load(eigen);
+with_slider_draw(
+    t, /* nome da variável utilizada pelo slider */
+    makelist((2*%pi*i)/100,i,0,100), /* intervalo dos valores de t, que vai de 0 a 2pi, de pouco em pouco para ter varios frames */
+    xrange=[-1.5,1.5], /* dimensão horizontal da janela do desenho */
+    yrange=[-1.5,1.5], /* dimensão vertical da janela do desenho */
+    head_length=0.05,head_angle=15,/* arrumando o tamanho e o angulo da seta do vetor */
+    label(["12:00",0,1.25],["06:00",0,-1.25],["03:00",1.25,0],["09:00",-1.25,0]),/* horas que vão aparecer no relogio*/
+    
+    vector([0,0],[sin(t), cos(t)]), /*ponteiro dos minutos*/
+    
+    vector([0,0],[sin(t/12), cos(t/12)]/2) /* ponteiro das horas, com a angulação variando 12 vezes menos que
+    o ponteiro dos minutos, pois enquanto ele percorre o relogio que é dividido em 12 partes(12 horas), o 
+    ponteiro das horas percorre apenas 1/12. Além dele ter a sua norma dividida por 2 para ser menor que o
+    ponteiro dos minutos*/
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+	;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

@@ -1,0 +1,74 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: input   start ] */
+letra(lm,lu):=
+block(
+    [quad,lret,v,ret,lx,ly,retangulo],
+    quad:transpose(matrix([0,0], [1,0], [0,1], [1,1])),
+    lret:[],
+    for k:1 thru length(lm) do(
+        v:transpose(matrix(lu[k],lu[k],lu[k],lu[k])),
+        ret:lm[k].quad+v,
+        lx:ret[1],
+        ly:ret[2],
+        retangulo:polygon(lx,ly),
+        cons(retangulo,lret)
+    ),
+    return(lret)
+)$
+
+D1:matrix([2,0],[0,1/2]);/*Cria uma barra longa e estreita */
+A1:matrix([1,0],[1,1]);/*Cisalhamento vertical inclina a barra para cima*/
+A1:A1.D1;
+R1:matrix([-1,0],[0,1]);/*Reflete em torno do eixo vertical*/
+A2:R1.A1;
+R2:matrix([1,0],[0,-1]);/*Reflete em torno do eixo horizontal*/
+D2:matrix([1,0],[0,4]); /*Estica ao longo da vertical*/
+A3:D2.R2.A1;
+A4:D2.R2.A2;
+A5:matrix([2.5,0],[0,-1/2]);
+lm:[A3,A4,A5];
+lu:[[0,3.5],[0,3.5],[-1.3,-0.3]];
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(lm,lu));
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: hide output   ] *//* [wxMaxima: input   start ] */
+D1:matrix([2,0],[0,1/2]);/*Cria uma barra longa e estreita */
+A1:matrix([1,0],[1,1]);/*Cisalhamento vertical inclina a barra para cima*/
+A1:A1.D1;
+R1:matrix([-1,0],[0,1]);/*Reflete em torno do eixo vertical*/
+A2:R1.A1;
+R2:matrix([1,0],[0,-1]);/*Reflete em torno do eixo horizontal*/
+D2:matrix([1,0],[0,4]); /*Estica ao longo da vertical*/
+A3:D2.R2.A1;
+A4:D2.R2.A2;
+A5:matrix([2.5,0],[0,-1/2]);
+lm:[A3,A4,A5];
+lu:[[0,3.5],[0,3.5],[-1.3,-0.3]];
+
+quad:transpose(matrix([0,0], [1,0], [0,1], [1,1]));
+lm[1];
+v:transpose(matrix(lu[1],lu[1],lu[1],lu[1]));
+lm[1].quad;
+lm[1].quad+v;
+
+
+/*lret:[];
+for k:1 thru length(lm) do(
+    v:transpose(matrix([lu[k],lu[k],lu[k],lu[k]])),
+    ret:lm[k].quad+v,
+    lx:ret[1],
+    ly:ret[2],
+    retangulo:polygon(lx,ly),
+    cons(retangulo,lret)
+);
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],lret);*/
+;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
