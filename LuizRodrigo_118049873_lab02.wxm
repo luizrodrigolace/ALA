@@ -1,0 +1,125 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: comment start ]
+Luiz Rodrigo Lacé Rodrigues - DRE:118049873
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+letra(lm,lu):=
+block(
+    [quad,lret,v,ret,lx,ly,retangulo],
+    quad:matrix([0,1,1,0],[0,0,1,1]),
+    lret:[],
+    for k:1 thru length(lm) do(
+        v:transpose(matrix(lu[k],lu[k],lu[k],lu[k])),
+        ret:lm[k].quad+v,
+        lx:ret[1],
+        ly:ret[2],
+        retangulo:polygon(lx,ly),
+        lret:cons(retangulo,lret)
+    ),
+    return(lret)
+)$
+
+/*letra I*/
+i1:transpose(matrix([0.5,0],[0,4]))$
+ilist:[i1]$
+iv:[[0,-2]]$/*lista de vetores para transladar*/
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(ilist,iv))$
+
+/*letra L*/
+l1:transpose(matrix([0.5,0],[0,4]))$  /*barra vertical*/
+l2:transpose(matrix([2,0],[0,0.5]))$ /*barra horizontal*/
+llist:[l1,l2]$
+lv:[[0,-2],[0,-2]]$/*lista de vetores para transladar*/
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(llist,lv))$
+
+/*letra V*/
+v1:transpose(matrix([0.5,0],[0,4]))$
+A1:transpose(matrix([1,0],[0.5,1]))$
+A1:A1.v1$
+R1:matrix([-1,0],[0,1]);/*Reflete em torno do eixo vertical*/
+A2:R1.A1$
+vlist:[A1,A2]$
+vv:[[0,-2],[0.5,-2]]$/*lista de vetores para transladar*/
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(vlist,vv))$
+
+/*letra F*/
+f1:matrix([0.5,0],[0,4])$/*barra vertical*/
+f2:matrix([2,0],[0,0.5])$/*traço superior*/
+f3:matrix([1.5,0],[0,0.5])$/*traço inferior*/
+flist:[f1,f2,f3]$
+fv:[[0,-2],[0,2],[0,0.25]]$/*lista de vetores para transladar*/
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(flist,fv))$
+
+/*letra H*/
+h1:transpose(matrix([0.5,0],[0,4]))$/*barra vertical esquerda*/
+h2:transpose(matrix([0.5,0],[0,4]))$/*barra vertical direita*/
+h3:transpose(matrix([2,0],[0,0.75]))$/*barra horizonal */
+hlist:[h1,h2,h3]$
+hv:[[-1,-2],[1,-2],[-1,-0.5]]$/*lista de vetores para transladar*/
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(hlist,hv))$
+
+/*letra M*/
+M1:transpose(matrix([0.5,0],[0,4]))$
+A1:transpose(matrix([1,0],[0.5,1]))$
+A1:A1.M1$
+R1:matrix([-1,0],[0,1])$/*Reflete em torno do eixo vertical*/
+A2:R1.A1$
+M3:transpose(matrix([0.5,0],[0,4.45]))$/*barra vertical esquerda*/
+M4:transpose(matrix([0.5,0],[0,4.45]))$/*barra vertical direita*/
+Mlist:[A1,A2,M3,M4]$
+Mv:[[0,-1.5],[0.5,-1.5],[-2,-2],[2,-2]]$/*lista de vetores para transladar*/ 
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(Mlist,Mv))$
+
+/*Letra S*/
+S1:matrix([2,0],[0,0.5])$/*traço superior*/
+S2:matrix([2,0],[0,0.5])$/*traço superior*/
+S3:matrix([2,0],[0,0.5])$/*traço superior*/
+S4:matrix([0.4,0],[0,2])$
+S5:matrix([0.4,0],[0,2])$
+Slist:[S1,S2,S3,S4,S5]$
+Sv:[[0,2],[0,0],[0,-2],[0,0],[1.6,-1.6]]$/*lista de vetores para transladar*/ 
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(Slist,Sv))$
+
+/*letra I em italico*/
+it1:transpose(matrix([0.5,0],[0,4]))$
+A1:transpose(matrix([1,0],[0.5,1]))$/*esticando a barra para a direita*/
+A1:A1.it1$
+llitst:[A1]$
+litv:[[0,-2]]$/*lista de vetores para transladar*/
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(llitst,litv))$
+
+/*letra F italico */
+f1:matrix([0.5,0],[0,4])$/*barra vertical*/
+A1:transpose(matrix([1,0],[0.5,1]))$/*esticando para direita*/
+A1:A1.f1$
+f2:matrix([0.5,0],[0,2])$ /*traço superior*/
+A2:transpose(matrix([0.5,1],[1,0]))$/*esticando para direita*/
+A2:A2.f2$
+f3:matrix([1,0],[0,1])$/*traço inferior*/
+A3:A2.f3$
+fitlist:[A1,A2,A3]$
+flitv:[[0,-2],[2,2],[1.25,0.25]]$/*lista de vetores para transladar*/
+wxdraw2d(xrange=[-5,5],yrange=[-5,5],letra(fitlist,flitv))$
+
+lms:[ilist,llist,vlist,flist,hlist,Mlist,Slist,llitst,fitlist]$
+lus:[iv,lv,vv,fv,hv,Mv,Sv,litv,flitv]$
+with_slider_draw(
+    t, /* nome da variável utilizada pelo slider */
+    makelist(i,i,1,9), /* lista de valores que t deve tomar */
+    xrange=[-5,5], /* dimensão horizontal da janela do desenho */
+    yrange=[-5,5], /* dimensão horizontal da janela do desenho */
+    letra(lms[t],lus[t])/* desenha a função */
+)$
+
+
+
+;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
